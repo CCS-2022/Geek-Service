@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration>
+
+<configuration>
+    <import class="ch.qos.logback.classic.encoder.PatternLayoutEncoder"/>
+    <import class="ch.qos.logback.core.ConsoleAppender"/>
+    <import class="ch.qos.logback.core.rolling.RollingFileAppender"/>
+
+
+    <appender name="FILEOUT" class="RollingFileAppender">
+        <file>
+            ./app/logs/app-log.log
+        </file>
+        <append>true</append>
+        <encoder class="PatternLayoutEncoder">
+            <pattern>
+                %d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} -%kvp- %msg %n
+            </pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>./logs/app-log.%d{yyyy-MM-dd_HH-mm}.%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>10KB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <maxHistory>3</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="STDOUT" class="ConsoleAppender" >
+        <encoder>
+            <pattern>
+                %d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} -%kvp- %msg %n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="FILEOUT"/>
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>
