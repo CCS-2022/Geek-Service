@@ -9,7 +9,7 @@
 
     <appender name="FILEOUT" class="RollingFileAppender">
         <file>
-            ./app/logs/app-log.log
+            ./logs/app-log.log
         </file>
         <append>true</append>
         <encoder class="PatternLayoutEncoder">
